@@ -1,0 +1,29 @@
+# Auto-Merge pre to main
+#
+# Triggered on push to pre branch.
+# Fast-forwards main to pre (no unit tests - e2e only).
+# Migrated from GitHub Actions to save ubuntu-latest minutes.
+
+when:
+  - event: push
+    branch: pre
+
+steps:
+  # No unit tests - only e2e tests available (Playwright)
+  # E2E tests run separately, not blocking merge
+
+  # Step 1: Fast-forward main to pre
+  - name: fast-forward-main
+    image: bash
+    commands:
+      - cd "${CI_WORKSPACE}"
+      - echo "=== Fast-Forward main to pre ==="
+      - echo "Branch ${CI_COMMIT_BRANCH}"
+      - echo "Commit ${CI_COMMIT_SHA}"
+      - git config user.name "woodpecker-ci[bot]"
+      - git config user.email "woodpecker-ci[bot]@users.noreply.github.com"
+      - git fetch origin main
+      - git checkout main
+      - git merge --ff-only origin/pre
+      - git push origin main
+      - echo "Successfully merged pre into main!"

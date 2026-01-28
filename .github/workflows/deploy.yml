@@ -1,10 +1,12 @@
 name: Deploy to Edge
 
+# pre->main merge handled by Woodpecker CI (.woodpecker/auto-merge.yml)
+# This workflow only triggers edge deployment on main
+
 on:
   push:
     branches:
-      - main
-      - pre
+      - main  # Only main - pre is handled by Woodpecker auto-merge
   workflow_dispatch:
     inputs:
       environment:
@@ -26,9 +28,7 @@ jobs:
       - name: Set environment
         id: env
         run: |
-          if [ "${{ github.ref }}" = "refs/heads/pre" ]; then
-            echo "environment=preview" >> $GITHUB_OUTPUT
-          elif [ "${{ inputs.environment }}" != "" ]; then
+          if [ "${{ inputs.environment }}" != "" ]; then
             echo "environment=${{ inputs.environment }}" >> $GITHUB_OUTPUT
           else
             echo "environment=prod" >> $GITHUB_OUTPUT
@@ -47,6 +47,6 @@ jobs:
               "client_payload": {
                 "app_name": "qr",
                 "environment": "${{ steps.env.outputs.environment }}",
-                "branch": "${{ github.ref_name }}"
+                "branch": "main"
               }
             }'

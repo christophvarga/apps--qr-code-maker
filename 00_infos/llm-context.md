@@ -1,7 +1,7 @@
 # QR Code Maker - LLM Context
 
-> Version: 1.0.0
-> Stand: 2025-12-12
+> Version: 1.1.0
+> Stand: 30.01.2026
 > Status: **FEATURE-COMPLETE**
 
 ## Ziel & Scope
@@ -30,6 +30,7 @@ Lokales QR-Code-Generator-Tool als standalone Web-App. Laeuft komplett client-si
 - **QR-Library:** qrcode-generator@1.4.4 (CDN)
 - **Fonts:** Google Fonts - Outfit
 - **Tests:** Playwright (Python) - 5 Testsuites
+- **CI/CD:** Woodpecker CI (Auto-Merge) + GitHub Actions (Deploy)
 
 ## STOP/HOLD/ASK/CONFIRM
 

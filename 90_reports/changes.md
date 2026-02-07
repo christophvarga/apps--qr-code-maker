@@ -1,5 +1,21 @@
 # Changes - QR Code Maker
 
+
+## [2026-02-07 22:13] Session 20260207-221320
+
+### Commits
+79e9a6a chore(cleanup): post-audit fixes -- remove legacy tests, fix nginx headers, cleanup docker-compose
+1deda27 chore(session): Auto-commit at session end
+bd8713f feat(security,a11y,refactor): harden app with input validation, ARIA, and code quality improvements; bump v1.2.0
+
+### Staged Changes
+- Keine staged Changes
+
+### Unstaged Changes
+00_infos/llm-context.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+---
 ## [2026-02-07] Post-Audit Cleanup (v1.2.2)
 
 ### Aenderungen

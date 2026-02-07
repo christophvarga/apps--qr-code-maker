@@ -7,8 +7,10 @@ Tests cover:
 - Text/URL QR code generation
 - WLAN QR code generation
 - Design options (colors, gradient)
-- Error handling for empty inputs
+- Error handling (inline error messages)
 - Download functionality
+- Accessibility (ARIA attributes, keyboard navigation)
+- Security (input validation, WiFi escaping)
 """
 
 import re
@@ -56,6 +58,16 @@ class TestPageLoad:
         button = qr_page.locator("#downloadBtn")
         expect(button).not_to_be_visible()
 
+    def test_error_message_hidden_initially(self, qr_page):
+        """Error message should be hidden on page load."""
+        error = qr_page.locator("#errorMessage")
+        expect(error).to_be_hidden()
+
+    def test_noscript_not_visible(self, qr_page):
+        """Noscript warning should not be visible when JS is enabled."""
+        noscript = qr_page.locator(".noscript-warning")
+        expect(noscript).to_have_count(0)
+
 
 class TestTabNavigation:
     """Tests for tab switching functionality."""
@@ -99,6 +111,78 @@ class TestTabNavigation:
         expect(active_tabs).to_have_count(1)
 
 
+class TestAccessibility:
+    """Tests for ARIA attributes and keyboard navigation."""
+
+    def test_tablist_role(self, qr_page):
+        """Tab container should have role='tablist'."""
+        tablist = qr_page.locator('[role="tablist"]')
+        expect(tablist).to_have_count(1)
+
+    def test_tab_roles(self, qr_page):
+        """Each tab should have role='tab'."""
+        tabs = qr_page.locator('[role="tab"]')
+        expect(tabs).to_have_count(3)
+
+    def test_tabpanel_roles(self, qr_page):
+        """Each tab content should have role='tabpanel'."""
+        panels = qr_page.locator('[role="tabpanel"]')
+        expect(panels).to_have_count(3)
+
+    def test_aria_selected_on_active_tab(self, qr_page):
+        """Active tab should have aria-selected='true'."""
+        active_tab = qr_page.locator('.tab.active')
+        expect(active_tab).to_have_attribute('aria-selected', 'true')
+
+    def test_aria_selected_updates_on_switch(self, qr_page):
+        """aria-selected should update when switching tabs."""
+        wifi_tab = qr_page.locator('.tab[data-tab="wifi"]')
+        text_tab = qr_page.locator('.tab[data-tab="text"]')
+
+        wifi_tab.click()
+
+        expect(wifi_tab).to_have_attribute('aria-selected', 'true')
+        expect(text_tab).to_have_attribute('aria-selected', 'false')
+
+    def test_aria_controls_present(self, qr_page):
+        """Tabs should have aria-controls linking to panels."""
+        text_tab = qr_page.locator('#tab-text')
+        expect(text_tab).to_have_attribute('aria-controls', 'textTab')
+
+    def test_keyboard_arrow_right_navigation(self, qr_page):
+        """ArrowRight should move to next tab."""
+        text_tab = qr_page.locator('.tab[data-tab="text"]')
+        text_tab.focus()
+        qr_page.keyboard.press("ArrowRight")
+
+        wifi_tab = qr_page.locator('.tab[data-tab="wifi"]')
+        expect(wifi_tab).to_have_attribute('aria-selected', 'true')
+
+    def test_keyboard_arrow_left_wraps(self, qr_page):
+        """ArrowLeft from first tab should wrap to last."""
+        text_tab = qr_page.locator('.tab[data-tab="text"]')
+        text_tab.focus()
+        qr_page.keyboard.press("ArrowLeft")
+
+        design_tab = qr_page.locator('.tab[data-tab="design"]')
+        expect(design_tab).to_have_attribute('aria-selected', 'true')
+
+    def test_error_message_has_alert_role(self, qr_page):
+        """Error message container should have role='alert'."""
+        error = qr_page.locator('#errorMessage')
+        expect(error).to_have_attribute('role', 'alert')
+
+    def test_canvas_has_aria_label(self, qr_page):
+        """Generated canvas should have aria-label."""
+        textarea = qr_page.locator("#qrText")
+        textarea.fill("Accessibility test")
+        qr_page.locator("#generateBtn").click()
+
+        canvas = qr_page.locator("#qrcode canvas")
+        expect(canvas).to_have_attribute('aria-label', 'Generierter QR-Code')
+        expect(canvas).to_have_attribute('role', 'img')
+
+
 class TestTextURLQRCode:
     """Tests for Text/URL QR code generation."""
 
@@ -124,20 +208,14 @@ class TestTextURLQRCode:
         canvas = qr_page.locator("#qrcode canvas")
         expect(canvas).to_be_visible()
 
-    def test_empty_text_shows_alert(self, qr_page):
-        """Empty text input should trigger alert."""
+    def test_empty_text_shows_inline_error(self, qr_page):
+        """Empty text input should show inline error message."""
         generate_btn = qr_page.locator("#generateBtn")
-
-        alert_message = []
-        qr_page.on("dialog", lambda dialog: (
-            alert_message.append(dialog.message),
-            dialog.accept()
-        ))
-
         generate_btn.click()
 
-        assert len(alert_message) == 1
-        assert "Text oder URL" in alert_message[0]
+        error = qr_page.locator("#errorMessage")
+        expect(error).to_be_visible()
+        expect(error).to_contain_text("Text oder URL")
 
     def test_download_button_appears_after_generation(self, qr_page):
         """Download button should appear after QR code generation."""
@@ -158,6 +236,20 @@ class TestTextURLQRCode:
 
         canvas = qr_page.locator("#qrcode canvas")
         expect(canvas).to_be_visible()
+
+    def test_error_clears_on_successful_generation(self, qr_page):
+        """Error should clear when QR code is successfully generated."""
+        generate_btn = qr_page.locator("#generateBtn")
+        generate_btn.click()
+
+        error = qr_page.locator("#errorMessage")
+        expect(error).to_be_visible()
+
+        textarea = qr_page.locator("#qrText")
+        textarea.fill("Valid text")
+        generate_btn.click()
+
+        expect(error).to_be_hidden()
 
 
 class TestWLANQRCode:
@@ -186,22 +278,17 @@ class TestWLANQRCode:
         canvas = qr_page.locator("#qrcode canvas")
         expect(canvas).to_be_visible()
 
-    def test_empty_ssid_shows_alert(self, qr_page):
-        """Empty SSID should trigger alert."""
+    def test_empty_ssid_shows_inline_error(self, qr_page):
+        """Empty SSID should show inline error message."""
         wifi_tab = qr_page.locator('.tab[data-tab="wifi"]')
         wifi_tab.click()
-
-        alert_message = []
-        qr_page.on("dialog", lambda dialog: (
-            alert_message.append(dialog.message),
-            dialog.accept()
-        ))
 
         generate_btn = qr_page.locator("#generateBtn")
         generate_btn.click()
 
-        assert len(alert_message) == 1
-        assert "SSID" in alert_message[0]
+        error = qr_page.locator("#errorMessage")
+        expect(error).to_be_visible()
+        expect(error).to_contain_text("SSID")
 
     def test_wifi_security_options(self, qr_page):
         """Security dropdown should have all options."""
@@ -219,6 +306,20 @@ class TestWLANQRCode:
 
         qr_page.locator("#wifiSsid").fill("OpenNetwork")
         qr_page.locator("#wifiSecurity").select_option("nopass")
+
+        generate_btn = qr_page.locator("#generateBtn")
+        generate_btn.click()
+
+        canvas = qr_page.locator("#qrcode canvas")
+        expect(canvas).to_be_visible()
+
+    def test_wifi_special_chars_in_ssid(self, qr_page):
+        """WiFi SSID with special characters should not break generation."""
+        wifi_tab = qr_page.locator('.tab[data-tab="wifi"]')
+        wifi_tab.click()
+
+        qr_page.locator("#wifiSsid").fill("My;Net:work\\Test")
+        qr_page.locator("#wifiPassword").fill("pass;word:123\\end")
 
         generate_btn = qr_page.locator("#generateBtn")
         generate_btn.click()

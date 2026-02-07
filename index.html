@@ -4,42 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'none';">
     <title>QR-Code Generator</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+    <noscript>
+        <div class="noscript-warning">
+            Diese App benoetigt JavaScript. Bitte aktiviere JavaScript in deinem Browser.
+        </div>
+    </noscript>
+
     <div class="container">
         <h1>QR-Code Generator</h1>
         <p class="subtitle">Erstelle individuelle QR-Codes</p>
 
-        <div class="tabs">
-            <div class="tab active" data-tab="text">Text/URL</div>
-            <div class="tab" data-tab="wifi">WLAN</div>
-            <div class="tab" data-tab="design">Design</div>
+        <div id="errorMessage" class="error-message" role="alert" aria-live="assertive" hidden></div>
+
+        <div class="tabs" role="tablist" aria-label="QR-Code Typ">
+            <div class="tab active" data-tab="text" role="tab" id="tab-text"
+                aria-selected="true" aria-controls="textTab" tabindex="0">Text/URL</div>
+            <div class="tab" data-tab="wifi" role="tab" id="tab-wifi"
+                aria-selected="false" aria-controls="wifiTab" tabindex="-1">WLAN</div>
+            <div class="tab" data-tab="design" role="tab" id="tab-design"
+                aria-selected="false" aria-controls="designTab" tabindex="-1">Design</div>
         </div>
 
-        <div id="textTab" class="tab-content active">
+        <div id="textTab" class="tab-content active" role="tabpanel" aria-labelledby="tab-text">
             <div class="input-group">
                 <label for="qrText">Text oder URL eingeben:</label>
-                <textarea id="qrText" placeholder="z.B. https://beispiel.de oder beliebiger Text..."></textarea>
+                <textarea id="qrText" placeholder="z.B. https://beispiel.de oder beliebiger Text..."
+                    maxlength="4296"></textarea>
             </div>
         </div>
 
-        <div id="wifiTab" class="tab-content">
+        <div id="wifiTab" class="tab-content" role="tabpanel" aria-labelledby="tab-wifi">
             <div class="input-group">
                 <label for="wifiSsid">Netzwerkname (SSID):</label>
-                <input type="text" id="wifiSsid" placeholder="Mein-WLAN">
+                <input type="text" id="wifiSsid" placeholder="Mein-WLAN" maxlength="32">
             </div>
             <div class="input-group">
                 <label for="wifiPassword">Passwort:</label>
-                <input type="password" id="wifiPassword" placeholder="Passwort">
+                <input type="password" id="wifiPassword" placeholder="Passwort" maxlength="63">
             </div>
             <div class="input-group">
-                <label for="wifiSecurity">Verschlüsselung:</label>
+                <label for="wifiSecurity">Verschluesselung:</label>
                 <select id="wifiSecurity">
                     <option value="WPA">WPA/WPA2</option>
                     <option value="WEP">WEP</option>
@@ -48,16 +63,16 @@
             </div>
         </div>
 
-        <div id="designTab" class="tab-content">
+        <div id="designTab" class="tab-content" role="tabpanel" aria-labelledby="tab-design">
             <div class="input-group">
                 <label>Farben:</label>
                 <div class="color-picker-row">
                     <div class="color-input">
-                        <label for="fgColor" style="font-size: 0.8em; margin-bottom: 4px;">Vordergrund</label>
+                        <label for="fgColor" class="color-label">Vordergrund</label>
                         <input type="color" id="fgColor" value="#000000">
                     </div>
                     <div class="color-input">
-                        <label for="bgColor" style="font-size: 0.8em; margin-bottom: 4px;">Hintergrund</label>
+                        <label for="bgColor" class="color-label">Hintergrund</label>
                         <input type="color" id="bgColor" value="#ffffff">
                     </div>
                 </div>
@@ -68,7 +83,7 @@
                 </div>
 
                 <div class="color-input">
-                    <label for="gradientColor" style="font-size: 0.8em; margin-bottom: 4px;">Verlauf-Farbe</label>
+                    <label for="gradientColor" class="color-label">Verlauf-Farbe</label>
                     <input type="color" id="gradientColor" value="#0000ff" disabled>
                 </div>
             </div>
@@ -76,13 +91,12 @@
             <div class="input-group">
                 <label>Logo:</label>
                 <div class="file-upload">
-                    <input type="file" id="logoInput" accept="image/*">
-                    <div class="file-upload-btn">Logo auswählen (PNG/JPG)</div>
+                    <input type="file" id="logoInput" accept="image/png,image/jpeg,image/gif,image/webp">
+                    <div class="file-upload-btn">Logo auswaehlen (PNG/JPG)</div>
                 </div>
-                <div id="logoName" style="font-size: 0.85em; color: #666; margin-bottom: 12px; text-align: center;">Kein
-                    Logo ausgewählt</div>
+                <div id="logoName" class="logo-name-display">Kein Logo ausgewaehlt</div>
 
-                <label for="logoSize">Logo Größe: <span id="logoSizeVal">20%</span></label>
+                <label for="logoSize">Logo Groesse: <span id="logoSizeVal">20%</span></label>
                 <div class="range-wrapper">
                     <input type="range" id="logoSize" min="5" max="30" value="20">
                 </div>
@@ -102,7 +116,7 @@
                     </select>
                 </div>
                 <div class="input-group option-small">
-                    <label for="pixelSize">Ausgabegröße:</label>
+                    <label for="pixelSize">Ausgabegroesse:</label>
                     <select id="pixelSize">
                         <option value="256">256 px</option>
                         <option value="400" selected>400 px</option>
@@ -115,7 +129,7 @@
 
         <button id="generateBtn">QR-Code Generieren</button>
 
-        <div id="qrcode">
+        <div id="qrcode" aria-label="QR-Code Ausgabebereich">
             <div class="empty-state">QR-Code wird hier angezeigt</div>
         </div>
 
@@ -124,7 +138,9 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"
+        integrity="sha384-lQXOAyZwHXE55JFyrOMB7nY2Wv+m5ZWNtJcHrd1rceRQXAYNLak8ukN5TjBTcIwz"
+        crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </body>
 

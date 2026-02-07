@@ -1,6 +1,3 @@
-/* Import Outfit Font */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
-
 * {
     margin: 0;
     padding: 0;
@@ -114,17 +111,48 @@ h1 {
     font-size: 2.5em;
     font-weight: 700;
     letter-spacing: -1px;
-    background: linear-gradient(135deg, #2a2a72 0%, #009ffd 100%);
+    background: linear-gradient(135deg, #1a1a6e 0%, #0077cc 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .subtitle {
     text-align: center;
-    color: #666;
+    color: #555;
     font-size: 1em;
     margin-bottom: 40px;
     font-weight: 400;
+}
+
+/* Error Message (replaces alert()) */
+.error-message {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.error-message[hidden] {
+    display: none;
+}
+
+/* Noscript Warning */
+.noscript-warning {
+    background: #fef3cd;
+    border: 2px solid #ffc107;
+    color: #856404;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 12px;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 1.1em;
+    font-weight: 600;
 }
 
 .input-group {
@@ -153,12 +181,26 @@ h1 {
 
 label {
     display: block;
-    color: #4a5568;
+    color: #374151;
     margin-bottom: 8px;
     font-weight: 500;
     font-size: 0.9em;
     letter-spacing: 0.3px;
     margin-left: 4px;
+}
+
+/* Color input sub-labels (moved from inline styles) */
+.color-label {
+    font-size: 0.8em;
+    margin-bottom: 4px;
+}
+
+/* Logo name display (moved from inline styles) */
+.logo-name-display {
+    font-size: 0.85em;
+    color: #555;
+    margin-bottom: 12px;
+    text-align: center;
 }
 
 input[type="text"],
@@ -252,6 +294,13 @@ button:disabled {
     box-shadow: none;
 }
 
+/* Focus visible for keyboard navigation */
+button:focus-visible,
+.tab:focus-visible {
+    outline: 3px solid #4facfe;
+    outline-offset: 2px;
+}
+
 #qrcode {
     display: flex;
     justify-content: center;
@@ -277,7 +326,7 @@ button:disabled {
 }
 
 .empty-state {
-    color: #a0aec0;
+    color: #6b7280;
     text-align: center;
     font-size: 1em;
     font-weight: 500;
@@ -287,7 +336,7 @@ button:disabled {
     display: none;
     background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
     box-shadow: 0 10px 20px rgba(67, 233, 123, 0.25);
-    color: #0f5132;
+    color: #064e2c;
 }
 
 #downloadBtn:hover {
@@ -319,7 +368,7 @@ button:disabled {
     padding: 12px;
     border: none;
     background: transparent;
-    color: #64748b;
+    color: #475569;
     font-weight: 600;
     font-size: 0.95em;
     cursor: pointer;
@@ -327,6 +376,7 @@ button:disabled {
     transition: all 0.3s ease;
     z-index: 1;
     position: relative;
+    text-align: center;
 }
 
 .tab.active {
@@ -336,7 +386,7 @@ button:disabled {
 }
 
 .tab:hover:not(.active) {
-    color: #475569;
+    color: #334155;
     background: rgba(255, 255, 255, 0.5);
 }
 
@@ -369,7 +419,7 @@ button:disabled {
 
 .advanced-title {
     font-size: 0.8em;
-    color: #94a3b8;
+    color: #6b7280;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -388,7 +438,7 @@ button:disabled {
 
 .option-small label {
     font-size: 0.85em;
-    color: #64748b;
+    color: #475569;
     margin-bottom: 8px;
 }
 
@@ -465,7 +515,7 @@ button:disabled {
     background: #f8fafc;
     border: 2px dashed #cbd5e0;
     border-radius: 16px;
-    color: #64748b;
+    color: #475569;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
@@ -474,7 +524,7 @@ button:disabled {
 .file-upload-btn:hover {
     background: #f1f5f9;
     border-color: #94a3b8;
-    color: #475569;
+    color: #334155;
 }
 
 .range-wrapper {
@@ -489,6 +539,17 @@ button:disabled {
     background: #e2e8f0;
     border-radius: 3px;
     outline: none;
+}
+
+/* Reduced Motion: Disable all animations for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
 
 @media (max-width: 600px) {

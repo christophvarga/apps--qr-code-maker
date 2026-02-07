@@ -4,17 +4,17 @@
 
 | Metrik | Wert |
 |--------|------|
-| Datum | 2025-12-12 23:00 |
+| Datum | 07.02.2026 |
 | Suite | Playwright E2E |
 | Browser | Chromium |
-| Passed | 33 |
+| Passed | 47 |
 | Failed | 0 |
 | Skipped | 0 |
-| Laufzeit | 28.57s |
+| Laufzeit | 36.72s |
 
 ## Test Kategorien
 
-### TestPageLoad (7 Tests)
+### TestPageLoad (9 Tests)
 - test_page_title - PASSED
 - test_heading_visible - PASSED
 - test_subtitle_visible - PASSED
@@ -22,6 +22,8 @@
 - test_text_tab_active_by_default - PASSED
 - test_generate_button_visible - PASSED
 - test_download_button_hidden_initially - PASSED
+- test_error_message_hidden_initially - PASSED
+- test_noscript_not_visible - PASSED
 
 ### TestTabNavigation (4 Tests)
 - test_switch_to_wifi_tab - PASSED
@@ -29,19 +31,33 @@
 - test_switch_back_to_text_tab - PASSED
 - test_only_one_tab_active - PASSED
 
-### TestTextURLQRCode (5 Tests)
+### TestAccessibility (11 Tests)
+- test_tablist_role - PASSED
+- test_tab_roles - PASSED
+- test_tabpanel_roles - PASSED
+- test_aria_selected_on_active_tab - PASSED
+- test_aria_selected_updates_on_switch - PASSED
+- test_aria_controls_present - PASSED
+- test_keyboard_arrow_right_navigation - PASSED
+- test_keyboard_arrow_left_wraps - PASSED
+- test_error_message_has_alert_role - PASSED
+- test_canvas_has_aria_label - PASSED
+
+### TestTextURLQRCode (6 Tests)
 - test_generate_url_qr_code - PASSED
 - test_generate_text_qr_code - PASSED
-- test_empty_text_shows_alert - PASSED
+- test_empty_text_shows_inline_error - PASSED
 - test_download_button_appears_after_generation - PASSED
 - test_enter_key_generates_qr - PASSED
+- test_error_clears_on_successful_generation - PASSED
 
-### TestWLANQRCode (5 Tests)
+### TestWLANQRCode (6 Tests)
 - test_wifi_form_elements_present - PASSED
 - test_generate_wifi_qr_code - PASSED
-- test_empty_ssid_shows_alert - PASSED
+- test_empty_ssid_shows_inline_error - PASSED
 - test_wifi_security_options - PASSED
 - test_wifi_without_password - PASSED
+- test_wifi_special_chars_in_ssid - PASSED
 
 ### TestDesignOptions (4 Tests)
 - test_color_pickers_present - PASSED
@@ -60,8 +76,3 @@
 ### TestQRCodeRegeneration (2 Tests)
 - test_regenerate_with_different_text - PASSED
 - test_switch_from_text_to_wifi - PASSED
-
-## Artefakte
-
-- JUnit XML: `89_output/test_reports/20251212-2300/junit-playwright.xml`
-- Symlink: `89_output/test_reports/latest`

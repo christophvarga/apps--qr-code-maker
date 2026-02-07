@@ -1,5 +1,19 @@
 # Changes - Security, Accessibility & Code Quality Hardening (v1.2.0)
 
+
+## [2026-02-07 22:06] Session 20260207-220631
+
+### Commits
+bd8713f feat(security,a11y,refactor): harden app with input validation, ARIA, and code quality improvements; bump v1.2.0
+
+### Staged Changes
+- Keine staged Changes
+
+### Unstaged Changes
+00_infos/llm-context.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+---
 ## Datum: 07.02.2026
 
 ## Aenderungen

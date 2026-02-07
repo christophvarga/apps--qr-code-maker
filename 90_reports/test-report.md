@@ -31,7 +31,7 @@
 - test_switch_back_to_text_tab - PASSED
 - test_only_one_tab_active - PASSED
 
-### TestAccessibility (11 Tests)
+### TestAccessibility (10 Tests)
 - test_tablist_role - PASSED
 - test_tab_roles - PASSED
 - test_tabpanel_roles - PASSED

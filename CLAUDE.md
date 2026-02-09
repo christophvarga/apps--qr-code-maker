@@ -1,4 +1,4 @@
-# 2025__tool-util-local__qr-code-maker
+# apps--qr-code-maker
 
 > Generated: 2025-12-02 18:42
 

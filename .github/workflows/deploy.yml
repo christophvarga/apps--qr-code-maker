@@ -19,7 +19,7 @@ on:
           - preview
 
 env:
-  INFRA_REPO: christophvarga/0000__infra-multi__ci-cd
+  INFRA_REPO: christophvarga/infra--ci-cd
 
 jobs:
   deploy:

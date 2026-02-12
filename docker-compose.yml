@@ -1,7 +1,7 @@
 services:
-  qr:
+  qr-code-maker:
     build: .
-    container_name: qr
+    container_name: qr-code-maker
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost/health"]
@@ -13,9 +13,9 @@ services:
       - web
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.qr.rule=Host(`qr.varga.media`)"
-      - "traefik.http.routers.qr.entrypoints=web"
-      - "traefik.http.services.qr.loadbalancer.server.port=80"
+      - "traefik.http.routers.qr-code-maker.rule=Host(`qr.varga.media`)"
+      - "traefik.http.routers.qr-code-maker.entrypoints=web"
+      - "traefik.http.services.qr-code-maker.loadbalancer.server.port=80"
       - "traefik.docker.network=web"
 
 networks:

@@ -2,14 +2,10 @@
 #
 # Flow: push to main -> trigger infra edge-deploy-on-push pipeline
 #
-# Required Secrets (set in Woodpecker for this repo):
-#   - woodpecker_api_token (token with pipeline create permission)
-#   - cf_access_client_id (Cloudflare Access Service Token)
-#   - cf_access_client_secret (Cloudflare Access Service Token)
-#
-# IMPORTANT: Secret env vars MUST use $${VAR} (double dollar) in commands!
-# Woodpecker pre-processes ${VAR} before shell execution.
-# Only CI variables (${CI_COMMIT_BRANCH} etc.) use single ${}.
+# Required Secrets:
+#   - woodpecker_api_token
+#   - cf_access_client_id
+#   - cf_access_client_secret
 
 when:
   - event: push

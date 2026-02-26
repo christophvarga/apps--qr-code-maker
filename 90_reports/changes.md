@@ -1,6 +1,74 @@
 # Changes - QR Code Maker
 
 
+## [2026-02-26 12:43] Session 20260226-124344
+
+### Commits
+274f17a docs: bump llm-context to v1.2.6 and update changes report
+2788232 feat(tests): split test suite into core UI and feature tests
+
+### Staged Changes
+- Keine staged Changes
+
+### Unstaged Changes
+00_infos/llm-context.md | 17 +++++++++++-----
+ 90_reports/changes.md   | 52 +++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 64 insertions(+), 5 deletions(-)
+
+---
+## [2026-02-26] Add requirements.txt and Makefile (v1.2.9)
+
+### Aenderungen
+- **requirements.txt**: Test-Dependencies mit gepinnten Versionen (playwright==1.57.0, pytest==9.0.2, pytest-playwright==0.7.2, pytest-base-url==2.1.0, pytest-cov==7.0.0)
+- **Makefile**: Targets `install`, `test`, `test-report` (kanonisches Format)
+- **llm-context.md**: Setup-Anleitung aktualisiert, neue Dateien dokumentiert, Version 1.2.9
+
+### Neue Dateien
+- `requirements.txt`
+- `Makefile`
+
+### Geaenderte Dateien
+- `00_infos/llm-context.md` - v1.2.9, Setup-Docs
+
+### Tests
+- 47 Tests, alle bestanden (keine Aenderung an Testcode)
+
+### Risiken/HOLDs
+- Keine
+
+---
+
+## [2026-02-26 12:35] Session 20260226-123505
+
+### Commits
+274f17a docs: bump llm-context to v1.2.6 and update changes report
+2788232 feat(tests): split test suite into core UI and feature tests
+
+### Staged Changes
+- Keine staged Changes
+
+### Unstaged Changes
+00_infos/llm-context.md |  2 +-
+ 90_reports/changes.md   | 15 +++++++++++++++
+ 2 files changed, 16 insertions(+), 1 deletion(-)
+
+---
+
+## [2026-02-26 12:34] Session 20260226-123400
+
+### Commits
+274f17a docs: bump llm-context to v1.2.6 and update changes report
+2788232 feat(tests): split test suite into core UI and feature tests
+
+### Staged Changes
+- Keine staged Changes
+
+### Unstaged Changes
+00_infos/llm-context.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+---
+
 ## [2026-02-26 12:22] Session 20260226-122220
 
 ### Commits

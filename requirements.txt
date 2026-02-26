@@ -1,0 +1,8 @@
+# Test dependencies for QR Code Maker
+# Install: pip install -r requirements.txt && playwright install chromium
+
+playwright==1.57.0
+pytest==9.0.2
+pytest-playwright==0.7.2
+pytest-base-url==2.1.0
+pytest-cov==7.0.0

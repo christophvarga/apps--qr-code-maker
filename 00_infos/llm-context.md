@@ -1,6 +1,6 @@
 # QR Code Maker - LLM Context
 
-> Version: 1.2.6
+> Version: 1.2.10
 > Stand: 07.02.2026
 > Status: **FEATURE-COMPLETE**
 
@@ -55,11 +55,16 @@ Lokales QR-Code-Generator-Tool als standalone Web-App. Laeuft komplett client-si
 
 **Testausfuehrung:**
 ```bash
-# Aktiviere venv
-source venv/bin/activate
+# Setup (einmalig)
+pip install -r requirements.txt && playwright install chromium
 
-# Tests ausfuehren (file:// Protokoll, kein Server noetig)
-pytest 87_tests/e2e/test_qr_code_ui.py -v
+# Tests ausfuehren
+pytest 87_tests/ -v
+
+# Oder via Make
+make install   # Setup
+make test      # Tests ausfuehren
+make test-report  # Tests mit JUnit/Coverage-Artefakten
 ```
 
 ## Strukturkonventionen
@@ -70,6 +75,8 @@ pytest 87_tests/e2e/test_qr_code_ui.py -v
 - `87_tests/e2e/test_qr_code_ui.py` - Core UI Tests (PageLoad, Tabs, Accessibility, Text/URL)
 - `87_tests/e2e/test_qr_code_features.py` - Feature Tests (WLAN, Design, Settings, Regeneration)
 - `87_tests/conftest.py` - Test-Fixtures
+- `requirements.txt` - Test-Dependencies (Playwright, pytest)
+- `Makefile` - Build-Targets (install, test, test-report)
 - `venv/` - Python Virtual Environment fuer Tests
 
 ## Security

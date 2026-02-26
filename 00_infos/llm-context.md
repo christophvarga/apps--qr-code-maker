@@ -1,6 +1,6 @@
 # QR Code Maker - LLM Context
 
-> Version: 1.2.4
+> Version: 1.2.5
 > Stand: 07.02.2026
 > Status: **FEATURE-COMPLETE**
 
@@ -67,7 +67,8 @@ pytest 87_tests/e2e/test_qr_code_ui.py -v
 - `index.html`, `script.js`, `styles.css` - Hauptanwendung (Root-Level, da standalone Tool)
 - `nginx.conf` - Custom Nginx-Konfiguration (Gzip, Caching, Health-Endpoint)
 - `00_infos/` - Dokumentation und Kontext
-- `87_tests/e2e/` - Playwright E2E-Tests
+- `87_tests/e2e/test_qr_code_ui.py` - Core UI Tests (PageLoad, Tabs, Accessibility, Text/URL)
+- `87_tests/e2e/test_qr_code_features.py` - Feature Tests (WLAN, Design, Settings, Regeneration)
 - `87_tests/conftest.py` - Test-Fixtures
 - `venv/` - Python Virtual Environment fuer Tests
 

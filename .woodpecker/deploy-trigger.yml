@@ -48,7 +48,7 @@ steps:
           }")
 
         if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
-          PIPELINE_NUM=$(cat /tmp/deploy-response.json | python3 -c "import json,sys; print(json.load(sys.stdin).get('number','?'))" 2>/dev/null || echo "?")
+          PIPELINE_NUM=$(sed -n 's/.*"number":\([0-9]*\).*/\1/p' /tmp/deploy-response.json 2>/dev/null || echo "?")
           echo "Deploy pipeline triggered! (Pipeline #$${PIPELINE_NUM})"
         else
           echo "ERROR: Failed to trigger deploy (HTTP $HTTP_CODE)"

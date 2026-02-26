@@ -14,7 +14,7 @@ when:
 
 steps:
   - name: trigger-deploy
-    image: bash
+    image: alpine
     environment:
       WOODPECKER_API_TOKEN:
         from_secret: woodpecker_api_token
@@ -23,6 +23,7 @@ steps:
       CF_ACCESS_CLIENT_SECRET:
         from_secret: cf_access_client_secret
     commands:
+      - apk add --no-cache curl
       - |
         echo "=== Deploy Trigger ==="
         echo "App: qr"

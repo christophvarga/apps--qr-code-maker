@@ -1,6 +1,20 @@
 # Changes - QR Code Maker
 
 
+## [2026-02-26 12:22] Session 20260226-122220
+
+### Commits
+2788232 feat(tests): split test suite into core UI and feature tests
+
+### Staged Changes
+- Keine staged Changes
+
+### Unstaged Changes
+00_infos/llm-context.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+---
+
 ## [2026-02-08 16:41] Session 20260208-164124
 
 ### Commits

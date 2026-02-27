@@ -1,6 +1,94 @@
 # Changes - QR Code Maker
 
 
+## [2026-02-27] Cleanup: Stale Test-PNGs entfernt (v1.2.15)
+
+### Aenderungen
+- **18 PNG-Dateien entfernt**: test_*.png, fix_verified_*.png, wlan_qr_*.png aus Repo-Root (~5MB)
+- **llm-context.md**: Hinweis ergaenzt, dass generierte Screenshots nach `89_output/` gehoeren; Version 1.2.15
+
+### Entfernte Dateien
+- 18 PNG-Testbilder (generiert waehrend Entwicklung, gitignored aber im Working Directory)
+
+### Geaenderte Dateien
+- `00_infos/llm-context.md` - v1.2.15, Strukturhinweis fuer 89_output/
+- `90_reports/changes.md` - Aktualisiert
+
+### Tests
+- Keine Testaenderungen (nur Cleanup)
+
+### Risiken/HOLDs
+- Keine
+
+---
+
+## [2026-02-26 13:14] Session 20260226-131437
+
+### Commits
+3574ffc chore(session): Auto-commit at session end
+274f17a docs: bump llm-context to v1.2.6 and update changes report
+2788232 feat(tests): split test suite into core UI and feature tests
+
+### Staged Changes
+- Keine staged Changes
+
+### Unstaged Changes
+00_infos/llm-context.md |  2 +-
+ 90_reports/changes.md   | 50 +++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 51 insertions(+), 1 deletion(-)
+
+---
+
+## [2026-02-26 13:14] Session 20260226-131403
+
+### Commits
+3574ffc chore(session): Auto-commit at session end
+274f17a docs: bump llm-context to v1.2.6 and update changes report
+2788232 feat(tests): split test suite into core UI and feature tests
+
+### Staged Changes
+- Keine staged Changes
+
+### Unstaged Changes
+00_infos/llm-context.md |  2 +-
+ 90_reports/changes.md   | 33 +++++++++++++++++++++++++++++++++
+ 2 files changed, 34 insertions(+), 1 deletion(-)
+
+---
+
+## [2026-02-26 12:49] Session 20260226-124909
+
+### Commits
+3574ffc chore(session): Auto-commit at session end
+274f17a docs: bump llm-context to v1.2.6 and update changes report
+2788232 feat(tests): split test suite into core UI and feature tests
+
+### Staged Changes
+- Keine staged Changes
+
+### Unstaged Changes
+00_infos/llm-context.md |  2 +-
+ 90_reports/changes.md   | 16 ++++++++++++++++
+ 2 files changed, 17 insertions(+), 1 deletion(-)
+
+---
+
+## [2026-02-26 12:46] Session 20260226-124623
+
+### Commits
+3574ffc chore(session): Auto-commit at session end
+274f17a docs: bump llm-context to v1.2.6 and update changes report
+2788232 feat(tests): split test suite into core UI and feature tests
+
+### Staged Changes
+- Keine staged Changes
+
+### Unstaged Changes
+00_infos/llm-context.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+---
+
 ## [2026-02-26 12:43] Session 20260226-124344
 
 ### Commits

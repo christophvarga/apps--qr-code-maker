@@ -1,7 +1,7 @@
 # QR Code Maker - LLM Context
 
-> Version: 1.2.10
-> Stand: 07.02.2026
+> Version: 1.2.15
+> Stand: 27.02.2026
 > Status: **FEATURE-COMPLETE**
 
 ## Ziel & Scope
@@ -78,6 +78,7 @@ make test-report  # Tests mit JUnit/Coverage-Artefakten
 - `requirements.txt` - Test-Dependencies (Playwright, pytest)
 - `Makefile` - Build-Targets (install, test, test-report)
 - `venv/` - Python Virtual Environment fuer Tests
+- `89_output/` - Test-Artefakte und generierte Screenshots (NICHT ins Repo-Root!)
 
 ## Security
 

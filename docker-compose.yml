@@ -2,7 +2,7 @@ services:
   qr-code-maker:
     build: .
     container_name: qr-code-maker
-    restart: unless-stopped
+    restart: always
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1/health"]
       interval: 30s
